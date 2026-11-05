@@ -2,6 +2,15 @@
 
 Todas las versiones siguen versionado semántico. Fechas en formato ISO 8601.
 
+## [0.1.2] - 2026-11-05
+
+### A?adido
+
+- Documento `SOURCES.md` con fuentes, licencias, marcas, firmware y condiciones de distribuci?n.
+- La ISO incluye `SOURCES.md` en `/usr/share/doc/corte-os/`.
+- La ISO se limita a paquetes libres de `main` y `contrib`; se elimina `non-free-firmware` y el microc?digo non-free.
+- Verificaci?n autom?tica de contenidos y licencias en GitHub Actions.
+
 ## [0.1.1] - 2026-11-05
 
 ### A?adido

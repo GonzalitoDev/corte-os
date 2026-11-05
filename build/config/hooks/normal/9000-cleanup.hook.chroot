@@ -1,6 +1,12 @@
 #!/bin/sh
 set -e
 
+for pkg in intel-microcode amd64-microcode firmware-iwlwifi firmware-realtek firmware-atheros firmware-brcm80211 firmware-ralink firmware-mediatek firmware-libertas firmware-misc-nonfree firmware-amd-graphics firmware-nvidia-graphics; do
+    if dpkg-query -W -f='${Status}' "$pkg" 2>/dev/null | grep -q "install ok installed"; then
+        apt-get purge -y "$pkg" >/dev/null 2>&1 || true
+    fi
+done
+
 rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*.deb /tmp/* /var/tmp/*
 rm -f /etc/corte/installed
 find /var/log -type f -exec truncate -s 0 {} \; 2>/dev/null || true

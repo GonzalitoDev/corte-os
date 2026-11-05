@@ -35,6 +35,7 @@ data = {
     "screenshots": [],
     "notes": [
         "Desarrollado por gonzita.",
+        "Incluye SOURCES.md y solo software libre de main/contrib.",
         "Es una beta: puede tener fallos; probala en una m?quina virtual.",
         "Base Debian 12 con arranque BIOS y UEFI.",
         "Escritorio XFCE personalizado y aplicaciones Corte.",

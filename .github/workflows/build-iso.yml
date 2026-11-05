@@ -27,7 +27,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            mtools dosfstools xorriso \
+            mtools dosfstools xorriso squashfs-tools \
             qemu-system-x86 qemu-utils ovmf \
             python3 ca-certificates curl file
 
@@ -45,6 +45,23 @@ jobs:
 
       - name: Clean build tree
         run: sudo rm -rf build/chroot build/binary build/cache build/bootstrap
+
+      - name: Verify ISO contents and licensing
+        run: |
+          ISO="dist/CorteOS-$(cat VERSION)-amd64.iso"
+          rm -f /tmp/corte-fs.squashfs
+          xorriso -osirrox on -indev "$ISO" -extract /live/filesystem.squashfs /tmp/corte-fs.squashfs >/dev/null 2>&1
+          test -f /tmp/corte-fs.squashfs
+          unsquashfs -cat /tmp/corte-fs.squashfs usr/share/doc/corte-os/SOURCES.md > /tmp/corte-SOURCES.md
+          grep -q "Fuentes y licencias de Corte OS" /tmp/corte-SOURCES.md
+          unsquashfs -cat /tmp/corte-fs.squashfs etc/corte/developer | grep -qx "gonzita"
+          unsquashfs -cat /tmp/corte-fs.squashfs usr/lib/os-release | grep -q 'DEVELOPER="gonzita"'
+          unsquashfs -cat /tmp/corte-fs.squashfs var/lib/dpkg/status > /tmp/corte-dpkg-status
+          if awk '/^Package: /{p=$2} /^Status: install ok installed/{print p}' /tmp/corte-dpkg-status | grep -qxE 'intel-microcode|amd64-microcode'; then
+            echo "ERROR: la ISO contiene microc?digo non-free"
+            exit 1
+          fi
+          echo "ISO verificada: SOURCES.md, desarrollador gonzita y sin microc?digo non-free."
 
       - name: Upload ISO (pre-test)
         uses: actions/upload-artifact@v4
