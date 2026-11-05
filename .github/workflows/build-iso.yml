@@ -36,7 +36,7 @@ jobs:
             python3 ca-certificates curl file
 
       - name: Build ISO
-        run: sudo ./build/build.sh
+        run: sudo bash ./build/build.sh
 
       - name: Verify checksums
         run: |
