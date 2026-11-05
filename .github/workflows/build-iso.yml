@@ -23,11 +23,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install build and test dependencies
+      - name: Install test dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            mtools dosfstools \
+            mtools dosfstools xorriso \
             qemu-system-x86 qemu-utils ovmf \
             python3 ca-certificates curl file
 
@@ -45,6 +45,71 @@ jobs:
 
       - name: Clean build tree
         run: sudo rm -rf build/chroot build/binary build/cache build/bootstrap
+
+      - name: Upload ISO (pre-test)
+        uses: actions/upload-artifact@v4
+        with:
+          name: corte-os-iso-pretest
+          path: |
+            dist/CorteOS-*.iso
+            dist/CorteOS-*.sha256
+            dist/CorteOS-*.sha512
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
+
+      - name: Inspect ISO boot configuration
+        run: |
+          ISO="dist/CorteOS-$(cat VERSION)-amd64.iso"
+          rm -rf /tmp/isolinux /tmp/grub /tmp/efi
+          xorriso -osirrox on -indev "$ISO" -extract /isolinux /tmp/isolinux >/dev/null 2>&1 || true
+          xorriso -osirrox on -indev "$ISO" -extract /boot/grub /tmp/grub >/dev/null 2>&1 || true
+          xorriso -osirrox on -indev "$ISO" -extract /EFI /tmp/efi >/dev/null 2>&1 || true
+          find /tmp/isolinux /tmp/grub /tmp/efi -maxdepth 3 -type f -print 2>/dev/null || true
+          echo "=== isolinux.cfg ==="
+          cat /tmp/isolinux/isolinux.cfg 2>/dev/null || true
+          echo "=== syslinux.cfg ==="
+          cat /tmp/isolinux/syslinux.cfg 2>/dev/null || true
+          echo "=== grub.cfg ==="
+          cat /tmp/grub/grub.cfg 2>/dev/null || true
+          echo "=== live files ==="
+          xorriso -indev "$ISO" -ls /live 2>/dev/null || true
+
+      - name: Direct kernel boot diagnostic
+        run: |
+          ISO="dist/CorteOS-$(cat VERSION)-amd64.iso"
+          mkdir -p /tmp/corte-live
+          xorriso -osirrox on -indev "$ISO" \
+            -extract /live/vmlinuz /tmp/corte-live/vmlinuz \
+            -extract /live/initrd.img /tmp/corte-live/initrd.img >/dev/null 2>&1
+          qemu-system-x86_64 \
+            -m 2048 -smp 2 -machine accel=tcg -vga std \
+            -display none -serial stdio -monitor none -no-reboot \
+            -netdev user,id=net0 -device e1000,netdev=net0 \
+            -drive "file=$ISO,media=cdrom,readonly=on" \
+            -kernel /tmp/corte-live/vmlinuz \
+            -initrd /tmp/corte-live/initrd.img \
+            -append "boot=live components live-media=/dev/sr0 console=ttyS0,115200n8 username=corte hostname=corte-os locales=es_ES.UTF-8 keyboard-layouts=es timezone=Europe/Madrid" \
+            > /tmp/corte-direct.log 2>&1 &
+          QPID=$!
+          OK=0
+          for _ in $(seq 1 450); do
+            if grep -q "CORTE_LIVE_READY" /tmp/corte-direct.log 2>/dev/null; then
+              OK=1
+              break
+            fi
+            if ! kill -0 "$QPID" 2>/dev/null; then
+              break
+            fi
+            sleep 2
+          done
+          kill "$QPID" 2>/dev/null || true
+          wait "$QPID" 2>/dev/null || true
+          tail -n 250 /tmp/corte-direct.log || true
+          if [ "$OK" -ne 1 ]; then
+            echo "No se detectó CORTE_LIVE_READY en el arranque directo del kernel."
+            exit 1
+          fi
 
       - name: Boot test (BIOS)
         run: bash scripts/ci/boot-test.sh dist/CorteOS-$(cat VERSION)-amd64.iso
