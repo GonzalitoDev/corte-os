@@ -27,16 +27,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            live-build debootstrap xorriso squashfs-tools \
-            isolinux syslinux syslinux-common syslinux-efi \
-            grub-pc-bin grub-efi-amd64-bin \
-            mtools dosfstools parted e2fsprogs rsync \
+            mtools dosfstools \
             qemu-system-x86 qemu-utils ovmf \
-            wget xz-utils zstd bzip2 gnupg fakeroot uuid-runtime cpio \
             python3 ca-certificates curl file
 
-      - name: Build ISO
-        run: sudo bash ./build/build.sh
+      - name: Build ISO in Debian bookworm container
+        run: |
+          docker build -t corte-os-builder -f build/Dockerfile .
+          docker run --rm --privileged -v "$PWD:/work" corte-os-builder /work/build/build.sh
 
       - name: Verify checksums
         run: |
@@ -46,7 +44,7 @@ jobs:
           sha512sum -c ./*.iso.sha512
 
       - name: Clean build tree
-        run: cd build && sudo lb clean
+        run: docker run --rm --privileged -v "$PWD:/work" corte-os-builder bash -c "cd /work/build && lb clean"
 
       - name: Boot test (BIOS)
         run: bash scripts/ci/boot-test.sh dist/CorteOS-$(cat VERSION)-amd64.iso

@@ -24,7 +24,6 @@ lb config noauto \
     --memtest none \
     --checksums sha256 \
     --source false \
-    --win32-loader false \
     --initsystem systemd \
     --updates true \
     --security true \

@@ -26,6 +26,11 @@ for tool in lb xorriso mksquashfs debootstrap; do
 done
 
 log "Corte OS $VERSION"
+log "Generando configuración de live-build"
+cd "$BUILD"
+lb clean >/dev/null 2>&1 || true
+bash "$CONFIG/auto/config"
+
 log "Preparando fuentes en el árbol de live-build"
 
 rm -rf "$STAGE_LIB" "$STAGE_SHARE" "$STAGE_DOC" "$STAGE_ICONS" "$STAGE_THEMES" "$STAGE_BACKGROUNDS" "$STAGE_PIXMAPS"
@@ -54,11 +59,6 @@ chmod 0755 "$CONFIG/auto/config"
 chmod 0755 "$BUILD"/config/hooks/normal/*.hook.chroot
 chmod 0755 "$CONFIG"/includes.chroot/usr/bin/* 2>/dev/null || true
 chmod 0644 "$CONFIG"/includes.chroot/usr/share/applications/*.desktop 2>/dev/null || true
-
-log "Generando configuración de live-build"
-cd "$BUILD"
-lb clean >/dev/null 2>&1 || true
-bash "$CONFIG/auto/config"
 
 log "Construyendo la imagen (esto puede tardar entre 20 y 60 minutos)"
 lb build
