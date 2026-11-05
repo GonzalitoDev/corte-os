@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+if [ ! -d isolinux ]; then
+    cd binary
+fi
+
+if [ -f isolinux/isolinux.cfg ]; then
+    sed -i 's/^timeout 0$/timeout 50/' isolinux/isolinux.cfg
+fi
+
+if [ -f isolinux/live.cfg ]; then
+    sed -i 's/Live system/Corte OS/g' isolinux/live.cfg
+fi
+
+if [ -f boot/grub/grub.cfg ]; then
+    sed -i 's/Live system/Corte OS/g' boot/grub/grub.cfg
+fi
+
+if [ -f boot/grub/config.cfg ]; then
+    grep -q '^set timeout=' boot/grub/config.cfg || printf '\nset timeout=5\n' >> boot/grub/config.cfg
+fi
+
+exit 0

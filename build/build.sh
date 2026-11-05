@@ -57,6 +57,7 @@ python3 -m compileall -q "$STAGE_LIB/corte"
 
 chmod 0755 "$CONFIG/auto/config"
 chmod 0755 "$BUILD"/config/hooks/normal/*.hook.chroot
+chmod 0755 "$BUILD"/config/hooks/normal/*.hook.binary
 chmod 0755 "$CONFIG"/includes.chroot/usr/bin/* 2>/dev/null || true
 chmod 0644 "$CONFIG"/includes.chroot/usr/share/applications/*.desktop 2>/dev/null || true
 
