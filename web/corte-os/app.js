@@ -115,7 +115,7 @@ async function boot() {
   setText(
     "download-description",
     available
-      ? "Esta es la beta 0.1.0 de Corte OS para VirtualBox. Arranca e instala, pero puede tener fallos. Probalá en una máquina virtual y reportá lo que se rompa."
+      ? "Esta es la beta 0.1.1 de Corte OS para VirtualBox. Arranca e instala, pero puede tener fallos. Probalá en una máquina virtual y reportá lo que se rompa."
       : "La ISO beta se publica únicamente después de compilarla y superar las pruebas automáticas de arranque e instalación."
   );
 

@@ -3,7 +3,7 @@ import sys
 
 from gi.repository import GLib
 
-from .common.paths import version
+from .common.paths import developer, version
 
 APPS = {
     "files": "corte.apps.files",
@@ -21,6 +21,8 @@ APPS = {
 }
 
 HELP = """Corte OS
+
+Desarrollado por gonzita.
 
 Uso:
   corte <aplicacion> [argumentos]
@@ -51,7 +53,7 @@ def main(argv=None):
         return 0
 
     if argv[0] in ("-v", "--version", "version"):
-        print(f"Corte OS {version()}")
+        print(f"Corte OS {version()} - desarrollador: {developer()}")
         return 0
 
     name = argv.pop(0)

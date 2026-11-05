@@ -2,6 +2,13 @@
 
 Todas las versiones siguen versionado semántico. Fechas en formato ISO 8601.
 
+## [0.1.1] - 2026-11-05
+
+### A?adido
+
+- Desarrollador `gonzita` en `/etc/os-release`, `/etc/corte/developer`, MOTD, `corte --version`, Corte Welcome y Corte Settings.
+- Metadatos de desarrollador en `/etc/corte/build-info` y `/etc/lsb-release`.
+
 ## [0.1.0] - 2026-11-04
 
 ### Añadido

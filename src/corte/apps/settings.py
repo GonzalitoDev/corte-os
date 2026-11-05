@@ -724,6 +724,7 @@ class SettingsApp:
             uptime = "—"
         rows = [
             ("Sistema", os_release.get("PRETTY_NAME", "Corte OS")),
+            ("Desarrollador", os_release.get("DEVELOPER", "gonzita")),
             ("Kernel", read_first("/proc/sys/kernel/osrelease").strip() or os.uname().release),
             ("Equipo", os.uname().nodename),
             ("Arquitectura", os.uname().machine),

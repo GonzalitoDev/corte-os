@@ -46,6 +46,13 @@ def version():
     return "0.1.0"
 
 
+def developer():
+    try:
+        return Path("/etc/corte/developer").read_text(encoding="utf-8").strip() or "gonzita"
+    except OSError:
+        return "gonzita"
+
+
 def share_dir():
     candidate = Path("/usr/share/corte")
     if candidate.is_dir():

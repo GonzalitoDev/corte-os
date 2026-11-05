@@ -22,6 +22,7 @@ import sys
 (out, version, size, sha256, sha512, url) = sys.argv[1:7]
 data = {
     "version": version,
+    "developer": "gonzita",
     "released": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
     "summary": "Beta de Corte OS para VirtualBox: escritorio propio, aplicaciones y Corte Installer.",
     "iso": {
@@ -33,6 +34,7 @@ data = {
     },
     "screenshots": [],
     "notes": [
+        "Desarrollado por gonzita.",
         "Es una beta: puede tener fallos; probala en una m?quina virtual.",
         "Base Debian 12 con arranque BIOS y UEFI.",
         "Escritorio XFCE personalizado y aplicaciones Corte.",

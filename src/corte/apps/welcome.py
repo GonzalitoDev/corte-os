@@ -58,7 +58,7 @@ class WelcomeApp:
         title = ui.label("CORTE OS", "corte-app-title", xalign=0.5)
         title.set_halign(Gtk.Align.CENTER)
         box.pack_start(title, False, False, 0)
-        subtitle = ui.label(f"Versión {paths.version()} · Base Debian 12", "corte-hint", xalign=0.5)
+        subtitle = ui.label(f"Versión {paths.version()} · por gonzita · Base Debian 12", "corte-hint", xalign=0.5)
         subtitle.set_halign(Gtk.Align.CENTER)
         box.pack_start(subtitle, False, False, 0)
 

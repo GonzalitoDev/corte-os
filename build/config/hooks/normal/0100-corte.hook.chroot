@@ -11,6 +11,7 @@ VERSION="${VERSION} (Base)"
 VERSION_CODENAME=base
 ID=corteos
 ID_LIKE=debian
+DEVELOPER="gonzita"
 ANSI_COLOR="1;36"
 HOME_URL="https://corte-editor-nine.vercel.app/"
 SUPPORT_URL="https://corte-editor-nine.vercel.app/"
@@ -22,14 +23,15 @@ DISTRIB_ID=CorteOS
 DISTRIB_RELEASE=${VERSION}
 DISTRIB_CODENAME=base
 DISTRIB_DESCRIPTION="Corte OS ${VERSION}"
+DISTRIB_DEVELOPER=gonzita
 EOF
 
-cat > /etc/issue <<'EOF'
-Corte OS \n \l
+cat > /etc/issue <<EOF
+Corte OS ${VERSION} - desarrollado por gonzita
 EOF
 
 cat > /etc/issue.net <<'EOF'
-Corte OS
+Corte OS - desarrollado por gonzita
 EOF
 
 cat > /etc/motd <<'EOF'
@@ -40,6 +42,7 @@ cat > /etc/motd <<'EOF'
  \____\___/|_|   \__\___| \___/|____/
 
  Corte OS - sistema operativo ligero
+ Desarrollado por gonzita
  Escribe 'corte --help' para abrir aplicaciones.
 EOF
 
@@ -54,7 +57,8 @@ EOF
 
 mkdir -p /etc/corte
 printf '%s\n' "$VERSION" > /etc/corte/version
-printf 'Corte OS %s\n' "$VERSION" > /etc/corte/build-info
+printf 'gonzita\n' > /etc/corte/developer
+printf 'Corte OS %s\nDesarrollador: gonzita\n' "$VERSION" > /etc/corte/build-info
 
 sed -i 's/^# *es_ES.UTF-8 UTF-8/es_ES.UTF-8 UTF-8/' /etc/locale.gen || true
 sed -i 's/^# *en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen || true
