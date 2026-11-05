@@ -44,7 +44,7 @@ jobs:
           sha512sum -c ./*.iso.sha512
 
       - name: Clean build tree
-        run: docker run --rm --privileged -v "$PWD:/work" corte-os-builder bash -c "cd /work/build && lb clean"
+        run: sudo rm -rf build/chroot build/binary build/cache build/bootstrap
 
       - name: Boot test (BIOS)
         run: bash scripts/ci/boot-test.sh dist/CorteOS-$(cat VERSION)-amd64.iso
