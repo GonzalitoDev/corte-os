@@ -1,0 +1,597 @@
+@define-color theme_bg_color #0b0f17;
+@define-color theme_fg_color #e6edf7;
+@define-color theme_base_color #111827;
+@define-color theme_text_color #e6edf7;
+@define-color theme_selected_bg_color #164e63;
+@define-color theme_selected_fg_color #ffffff;
+@define-color theme_tooltip_bg_color #0f1622;
+@define-color theme_tooltip_fg_color #e6edf7;
+@define-color insensitive_fg_color #667085;
+@define-color borders #263244;
+@define-color accent #22d3ee;
+@define-color accent_2 #8b5cf6;
+@define-color surface #121926;
+@define-color surface_alt #0f1521;
+@define-color danger #f87171;
+@define-color success #4ade80;
+@define-color warning #fbbf24;
+
+* {
+    outline-color: alpha(@accent, 0.55);
+    outline-style: dashed;
+    outline-width: 1px;
+    -GtkWidget-focus-line-width: 0;
+    -GtkWidget-focus-padding: 0;
+}
+
+window,
+.background {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
+window.csd {
+    border-radius: 12px;
+}
+
+headerbar,
+.titlebar,
+actionbar {
+    background-image: none;
+    background-color: #0e1521;
+    color: @theme_fg_color;
+    border-bottom: 1px solid @borders;
+    box-shadow: none;
+    min-height: 38px;
+    padding: 0 6px;
+}
+
+headerbar:backdrop,
+.titlebar:backdrop {
+    background-color: #0b111b;
+    color: #9aa7ba;
+}
+
+headerbar .title,
+.titlebar .title {
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+button {
+    background-image: none;
+    background-color: #151d2b;
+    color: @theme_fg_color;
+    border: 1px solid @borders;
+    border-radius: 8px;
+    padding: 6px 12px;
+    min-height: 22px;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+button:hover {
+    background-color: #1b2536;
+    border-color: #35506a;
+}
+
+button:active,
+button:checked {
+    background-color: #164e63;
+    border-color: @accent;
+    color: #ffffff;
+}
+
+button:disabled {
+    background-color: #101620;
+    color: @insensitive_fg_color;
+    border-color: #1d2838;
+}
+
+button.flat {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+button.flat:hover {
+    background-color: alpha(@accent, 0.12);
+}
+
+button.suggested-action {
+    background-color: #0e7490;
+    border-color: @accent;
+    color: #ffffff;
+}
+
+button.destructive-action {
+    background-color: #7f1d1d;
+    border-color: @danger;
+    color: #ffffff;
+}
+
+entry,
+spinbutton,
+.searchbar,
+textview,
+iconview,
+treeview,
+.view {
+    background-image: none;
+    background-color: @theme_base_color;
+    color: @theme_text_color;
+    border: 1px solid @borders;
+    border-radius: 8px;
+    padding: 5px 8px;
+    caret-color: @accent;
+}
+
+entry:focus,
+spinbutton:focus,
+textview:focus {
+    border-color: @accent;
+    box-shadow: 0 0 0 2px alpha(@accent, 0.18);
+}
+
+entry:disabled,
+textview:disabled {
+    color: @insensitive_fg_color;
+    background-color: #0d1320;
+}
+
+entry selection,
+textview selection,
+label selection {
+    background-color: #0e7490;
+    color: #ffffff;
+}
+
+menu,
+.menu,
+.context-menu,
+popover,
+popover.background {
+    background-color: #101724;
+    color: @theme_fg_color;
+    border: 1px solid @borders;
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+menuitem,
+modelbutton {
+    border-radius: 7px;
+    padding: 7px 10px;
+    color: @theme_fg_color;
+}
+
+menuitem:hover,
+modelbutton:hover {
+    background-color: alpha(@accent, 0.14);
+    color: #ffffff;
+}
+
+menuitem:disabled,
+modelbutton:disabled {
+    color: @insensitive_fg_color;
+}
+
+separator {
+    background-color: @borders;
+    min-width: 1px;
+    min-height: 1px;
+}
+
+menubar,
+toolbar {
+    background-color: @theme_bg_color;
+    border: none;
+    padding: 2px;
+}
+
+toolbar button {
+    padding: 5px;
+    border-radius: 8px;
+}
+
+tooltip {
+    background-color: @theme_tooltip_bg_color;
+    color: @theme_tooltip_fg_color;
+    border: 1px solid @borders;
+    border-radius: 8px;
+    padding: 5px 8px;
+}
+
+notebook {
+    background-color: transparent;
+    border: none;
+}
+
+notebook > header {
+    background-color: transparent;
+    border-bottom: 1px solid @borders;
+}
+
+notebook > header > tabs > tab {
+    background-color: transparent;
+    color: #9aa7ba;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 7px 14px;
+    border-radius: 0;
+}
+
+notebook > header > tabs > tab:hover {
+    color: @theme_fg_color;
+    background-color: alpha(@accent, 0.07);
+}
+
+notebook > header > tabs > tab:checked {
+    color: @accent;
+    border-bottom-color: @accent;
+    background-color: alpha(@accent, 0.08);
+}
+
+treeview.view,
+treeview.view:selected,
+.view:selected,
+iconview:selected {
+    background-color: @theme_base_color;
+    color: @theme_text_color;
+}
+
+treeview.view:hover {
+    background-color: #162133;
+}
+
+treeview.view:selected,
+.view:selected,
+iconview:selected {
+    background-color: #164e63;
+    color: #ffffff;
+}
+
+treeview.view header button {
+    background-color: #0e1521;
+    border: none;
+    border-right: 1px solid @borders;
+    border-bottom: 1px solid @borders;
+    border-radius: 0;
+    padding: 6px 10px;
+    font-weight: 600;
+}
+
+scrollbar {
+    background-color: transparent;
+    border: none;
+}
+
+scrollbar slider {
+    background-color: #31405a;
+    border-radius: 10px;
+    min-width: 8px;
+    min-height: 8px;
+    margin: 2px;
+}
+
+scrollbar slider:hover {
+    background-color: #47607f;
+}
+
+scrollbar slider:active {
+    background-color: @accent;
+}
+
+scrolledwindow undershoot,
+scrolledwindow overshoot {
+    background-image: none;
+}
+
+progressbar trough {
+    background-color: #0d1320;
+    border: 1px solid @borders;
+    border-radius: 8px;
+    min-height: 10px;
+}
+
+progressbar progress {
+    background-image: linear-gradient(90deg, @accent, @accent_2);
+    border-radius: 8px;
+    min-height: 10px;
+}
+
+levelbar block.filled {
+    background-color: @accent;
+    border-radius: 4px;
+}
+
+switch {
+    background-color: #1a2332;
+    border: 1px solid @borders;
+    border-radius: 999px;
+}
+
+switch:checked {
+    background-color: #0e7490;
+    border-color: @accent;
+}
+
+switch slider {
+    background-color: #e6edf7;
+    border-radius: 999px;
+}
+
+checkbutton check,
+radiobutton radio {
+    background-color: @theme_base_color;
+    border: 1px solid @borders;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+checkbutton check:checked,
+radiobutton radio:checked {
+    background-color: #0e7490;
+    border-color: @accent;
+    color: #ffffff;
+}
+
+checkbutton check:checked {
+    border-radius: 4px;
+}
+
+radiobutton radio,
+radiobutton radio:checked {
+    border-radius: 999px;
+}
+
+combobox button {
+    border-radius: 8px;
+}
+
+combobox arrow {
+    color: @accent;
+}
+
+spinbutton button {
+    border-radius: 6px;
+    padding: 2px 6px;
+}
+
+scale trough {
+    background-color: #0d1320;
+    border: 1px solid @borders;
+    border-radius: 999px;
+    min-height: 6px;
+}
+
+scale highlight {
+    background-image: linear-gradient(90deg, @accent, @accent_2);
+    border-radius: 999px;
+}
+
+scale slider {
+    background-color: #e6edf7;
+    border: 2px solid @accent;
+    border-radius: 999px;
+    min-width: 14px;
+    min-height: 14px;
+}
+
+frame > border,
+.frame {
+    border: 1px solid @borders;
+    border-radius: 10px;
+}
+
+frame > label {
+    color: #9aa7ba;
+    font-weight: 600;
+}
+
+list,
+list row {
+    background-color: transparent;
+}
+
+list row {
+    border-radius: 8px;
+    padding: 6px;
+}
+
+list row:hover {
+    background-color: #151d2b;
+}
+
+list row:selected {
+    background-color: #164e63;
+    color: #ffffff;
+}
+
+paned > separator {
+    background-color: @borders;
+    min-width: 1px;
+    min-height: 1px;
+}
+
+calendar {
+    background-color: @theme_base_color;
+    border: 1px solid @borders;
+    border-radius: 10px;
+}
+
+calendar:selected {
+    background-color: #0e7490;
+    color: #ffffff;
+    border-radius: 6px;
+}
+
+calendar.header {
+    background-color: #0e1521;
+    border-radius: 8px;
+}
+
+infobar {
+    border-radius: 8px;
+}
+
+infobar.info {
+    background-color: #0c2a37;
+    color: #bde9f5;
+}
+
+infobar.warning {
+    background-color: #3a2a08;
+    color: #fde68a;
+}
+
+infobar.error {
+    background-color: #3a1010;
+    color: #fecaca;
+}
+
+.xfce4-panel,
+#XfcePanelWindow {
+    background-color: rgba(7, 11, 18, 0.94);
+    border-top: 1px solid rgba(34, 211, 238, 0.22);
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.xfce4-panel button,
+#XfcePanelWindow button {
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 8px;
+    padding: 3px 6px;
+}
+
+.xfce4-panel button:hover,
+#XfcePanelWindow button:hover {
+    background-color: rgba(34, 211, 238, 0.12);
+}
+
+.xfce4-panel button:checked,
+#XfcePanelWindow button:checked {
+    background-color: rgba(34, 211, 238, 0.18);
+    border-color: rgba(34, 211, 238, 0.35);
+}
+
+#whiskermenu-window {
+    background-color: #0c1320;
+    border: 1px solid #263244;
+    border-radius: 14px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+}
+
+#whiskermenu-window entry {
+    background-color: #111b2a;
+    border-radius: 10px;
+    margin: 6px;
+}
+
+#whiskermenu-window treeview {
+    background-color: transparent;
+    border: none;
+}
+
+#whiskermenu-window treeview:selected {
+    background-color: #164e63;
+}
+
+#whiskermenu-window button {
+    border-radius: 8px;
+}
+
+#whiskermenu-window .category-button {
+    padding: 6px;
+}
+
+#whiskermenu-window .launcher {
+    border-radius: 10px;
+    padding: 8px;
+}
+
+#whiskermenu-window .launcher:hover {
+    background-color: rgba(34, 211, 238, 0.10);
+}
+
+.dim-label {
+    color: #8a97ab;
+}
+
+.accent {
+    color: @accent;
+}
+
+.muted {
+    color: #8a97ab;
+}
+
+.title-1 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.title-2 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.title-3 {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.card {
+    background-color: @surface;
+    border: 1px solid @borders;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.card:hover {
+    border-color: #35506a;
+}
+
+.corte-hero {
+    background-image: linear-gradient(135deg, rgba(34, 211, 238, 0.18), rgba(139, 92, 246, 0.16));
+    border: 1px solid rgba(34, 211, 238, 0.25);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.corte-badge {
+    background-color: rgba(34, 211, 238, 0.12);
+    border: 1px solid rgba(34, 211, 238, 0.35);
+    border-radius: 999px;
+    padding: 2px 10px;
+    color: @accent;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.corte-log {
+    background-color: #070b12;
+    color: #c7d2e2;
+    border: 1px solid @borders;
+    border-radius: 10px;
+    font-family: "JetBrains Mono", "DejaVu Sans Mono", monospace;
+    font-size: 11px;
+}
+
+.corte-danger {
+    color: @danger;
+}
+
+.corte-ok {
+    color: @success;
+}
+
+.corte-warning {
+    color: @warning;
+}
+
+.dnd {
+    border: 2px dashed @accent;
+    border-radius: 10px;
+}

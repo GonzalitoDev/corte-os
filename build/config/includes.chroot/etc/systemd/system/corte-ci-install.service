@@ -1,0 +1,13 @@
+[Unit]
+Description=Corte OS automated install test trigger
+After=local-fs.target
+ConditionPathExists=/usr/bin/corte-ci-install
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/corte-ci-install
+TimeoutStartSec=0
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

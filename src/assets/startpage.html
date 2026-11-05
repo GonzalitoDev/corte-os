@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corte Browser</title>
+<style>
+  :root {
+    --bg: #070b12;
+    --panel: #101724;
+    --panel-2: #0c1320;
+    --line: #263244;
+    --text: #e6edf7;
+    --muted: #8a97ab;
+    --cyan: #22d3ee;
+    --violet: #8b5cf6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(900px 500px at 15% 10%, rgba(34, 211, 238, 0.14), transparent 65%),
+      radial-gradient(800px 500px at 85% 80%, rgba(139, 92, 246, 0.16), transparent 65%),
+      var(--bg);
+    color: var(--text);
+    font-family: Inter, "DejaVu Sans", system-ui, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  .wrap { width: min(980px, 100%); }
+  .brand { display: flex; align-items: center; gap: 16px; margin-bottom: 30px; }
+  .brand img { width: 62px; height: 62px; }
+  .brand h1 { margin: 0; font-size: 30px; letter-spacing: 4px; }
+  .brand p { margin: 4px 0 0; color: var(--muted); font-size: 13px; letter-spacing: 1px; }
+  .search {
+    display: flex;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 8px;
+    margin-bottom: 26px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  }
+  .search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+  .search button {
+    background: linear-gradient(135deg, var(--cyan), var(--violet));
+    border: none;
+    border-radius: 10px;
+    color: #041016;
+    font-weight: 800;
+    padding: 0 22px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .card {
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color .15s, transform .15s;
+  }
+  .card:hover { border-color: var(--cyan); transform: translateY(-2px); }
+  .card b { display: block; margin-bottom: 6px; font-size: 15px; }
+  .card span { color: var(--muted); font-size: 12px; line-height: 1.5; }
+  .note {
+    margin-top: 24px;
+    padding: 14px 16px;
+    border: 1px solid rgba(34, 211, 238, .25);
+    background: rgba(34, 211, 238, .07);
+    border-radius: 12px;
+    color: #b9dce8;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .foot { margin-top: 22px; color: #5d6a7e; font-size: 11px; letter-spacing: 1px; text-align: center; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="brand">
+    <img src="file:///usr/share/corte/logo.svg" alt="Corte OS">
+    <div>
+      <h1>CORTE BROWSER</h1>
+      <p>NAVEGADOR WEB · CORTE OS</p>
+    </div>
+  </div>
+
+  <form class="search" action="https://duckduckgo.com/" method="get">
+    <input name="q" placeholder="Buscar en la web o escribir una dirección" autofocus>
+    <button type="submit">Buscar</button>
+  </form>
+
+  <div class="grid">
+    <a class="card" href="https://corte-editor-nine.vercel.app/">
+      <b>Corte Editor</b>
+      <span>Herramientas creativas en el navegador: vídeo, fotos, vectores y PDF.</span>
+    </a>
+    <a class="card" href="file:///usr/share/doc/corte-os/USER-MANUAL.md">
+      <b>Manual de usuario</b>
+      <span>Guía local de Corte OS, aplicaciones y atajos. Funciona sin Internet.</span>
+    </a>
+    <a class="card" href="file:///usr/share/doc/corte-os/INSTALL-VIRTUALBOX.md">
+      <b>Instalar en VirtualBox</b>
+      <span>Requisitos, creación de la máquina virtual e instalación paso a paso.</span>
+    </a>
+    <a class="card" href="file:///usr/share/doc/corte-os/BUILD.md">
+      <b>Construir Corte OS</b>
+      <span>Compila la ISO desde el código fuente con live-build o Docker.</span>
+    </a>
+    <a class="card" href="file:///usr/share/backgrounds/corte/corte-wallpaper-01.svg">
+      <b>Fondos de pantalla</b>
+      <span>Explora los fondos incluidos en el sistema.</span>
+    </a>
+    <a class="card" href="https://github.com/">
+      <b>GitHub</b>
+      <span>Requiere conexión a Internet. Se abre en este mismo navegador.</span>
+    </a>
+  </div>
+
+  <div class="note">
+    Esta página de inicio está almacenada en el disco y se abre sin conexión.
+    Las búsquedas y los sitios externos necesitan red. Si no hay conexión,
+    Corte Browser mostrará un error de carga en lugar de simular resultados.
+  </div>
+  <div class="foot">CORTE OS · SISTEMA OPERATIVO</div>
+</main>
+</body>
+</html>

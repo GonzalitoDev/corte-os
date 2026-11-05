@@ -1,0 +1,13 @@
+[Unit]
+Description=Corte OS boot marker
+Requires=lightdm.service
+After=lightdm.service
+Wants=lightdm.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'for i in $(seq 1 180); do pgrep -x xfce4-session >/dev/null 2>&1 && break; sleep 1; done; pgrep -x xfce4-session >/dev/null 2>&1 || exit 1; if [ -f /etc/corte/installed ]; then m=CORTE_INSTALLED_BOOT_OK; else m=CORTE_BOOT_OK; fi; (echo "$m $(uname -r) $(date -Is)" >> /dev/ttyS0 2>/dev/null) || true; (echo "$m" >> /dev/console 2>/dev/null) || true'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

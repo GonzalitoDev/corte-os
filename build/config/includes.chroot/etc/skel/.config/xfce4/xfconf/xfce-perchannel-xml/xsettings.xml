@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xsettings" version="1.0">
+  <property name="Net" type="empty">
+    <property name="ThemeName" type="string" value="Corte-Dark"/>
+    <property name="IconThemeName" type="string" value="Papirus-Dark"/>
+    <property name="CursorThemeName" type="string" value="Adwaita"/>
+    <property name="CursorThemeSize" type="int" value="24"/>
+    <property name="FontName" type="string" value="Inter 10"/>
+    <property name="MonospaceFontName" type="string" value="JetBrains Mono 10"/>
+    <property name="XftAntialias" type="bool" value="true"/>
+    <property name="XftHinting" type="bool" value="true"/>
+    <property name="XftRGBA" type="string" value="rgb"/>
+    <property name="XftDPI" type="int" value="96"/>
+  </property>
+  <property name="Xfce" type="empty">
+    <property name="LastCustomMenusChanged" type="int" value="0"/>
+  </property>
+</channel>

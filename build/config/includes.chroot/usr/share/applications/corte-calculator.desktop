@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Corte Calculator
+Comment=Calculadora de Corte OS
+Exec=corte calculator
+Icon=corte-calculator
+Terminal=false
+Categories=Utility;Calculator;
+StartupNotify=true
+StartupWMClass=corte-calculator
+X-Corte-App=true

@@ -1,0 +1,13 @@
+[Unit]
+Description=Corte OS live readiness marker
+Requires=lightdm.service
+After=lightdm.service
+Wants=lightdm.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'for i in $(seq 1 180); do pgrep -x xfce4-session >/dev/null 2>&1 && break; sleep 1; done; pgrep -x xfce4-session >/dev/null 2>&1 || exit 1; if [ -d /run/live/medium ] || [ -d /lib/live/mount/medium ]; then (echo "CORTE_LIVE_READY $(date -Is)" >> /dev/ttyS0 2>/dev/null) || true; (echo CORTE_LIVE_READY >> /dev/console 2>/dev/null) || true; fi'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

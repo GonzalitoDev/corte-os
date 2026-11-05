@@ -1,0 +1,223 @@
+#!/bin/sh
+set -e
+
+VERSION="$(cat /usr/share/corte/VERSION 2>/dev/null || echo 0.1.0)"
+
+cat > /etc/os-release <<EOF
+PRETTY_NAME="Corte OS ${VERSION}"
+NAME="Corte OS"
+VERSION_ID="${VERSION}"
+VERSION="${VERSION} (Base)"
+VERSION_CODENAME=base
+ID=corteos
+ID_LIKE=debian
+ANSI_COLOR="1;36"
+HOME_URL="https://corte-editor-nine.vercel.app/"
+SUPPORT_URL="https://corte-editor-nine.vercel.app/"
+BUG_REPORT_URL="https://corte-editor-nine.vercel.app/"
+EOF
+
+cat > /etc/lsb-release <<EOF
+DISTRIB_ID=CorteOS
+DISTRIB_RELEASE=${VERSION}
+DISTRIB_CODENAME=base
+DISTRIB_DESCRIPTION="Corte OS ${VERSION}"
+EOF
+
+cat > /etc/issue <<'EOF'
+Corte OS \n \l
+EOF
+
+cat > /etc/issue.net <<'EOF'
+Corte OS
+EOF
+
+cat > /etc/motd <<'EOF'
+  ____            _         ___  ____
+ / ___|___  _ __| |_ ___  / _ \/ ___|
+| |   / _ \| '__| __/ _ \| | | \___ \
+| |__| (_) | |  | ||  __/| |_| |___) |
+ \____\___/|_|   \__\___| \___/|____/
+
+ Corte OS - sistema operativo ligero
+ Escribe 'corte --help' para abrir aplicaciones.
+EOF
+
+echo "corte-os" > /etc/hostname
+cat > /etc/hosts <<'EOF'
+127.0.0.1       localhost
+127.0.1.1       corte-os
+::1             localhost ip6-localhost ip6-loopback
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
+EOF
+
+mkdir -p /etc/corte
+printf '%s\n' "$VERSION" > /etc/corte/version
+printf 'Corte OS %s\n' "$VERSION" > /etc/corte/build-info
+
+sed -i 's/^# *es_ES.UTF-8 UTF-8/es_ES.UTF-8 UTF-8/' /etc/locale.gen || true
+sed -i 's/^# *en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen || true
+grep -q '^es_ES.UTF-8 UTF-8' /etc/locale.gen || echo 'es_ES.UTF-8 UTF-8' >> /etc/locale.gen
+grep -q '^en_US.UTF-8 UTF-8' /etc/locale.gen || echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen
+locale-gen
+update-locale LANG=es_ES.UTF-8 LC_ALL=es_ES.UTF-8
+
+ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
+echo "Europe/Madrid" > /etc/timezone
+
+cat > /etc/default/keyboard <<'EOF'
+XKBMODEL="pc105"
+XKBLAYOUT="es"
+XKBVARIANT=""
+XKBOPTIONS="grp:alt_shift_toggle"
+BACKSPACE="guess"
+EOF
+
+printf 'corte ALL=(ALL) NOPASSWD:ALL\n' > /etc/sudoers.d/90-corte-live
+chmod 0440 /etc/sudoers.d/90-corte-live
+
+mkdir -p /etc/gtk-3.0 /etc/xdg/autostart /etc/xdg/xfce4
+
+cat > /etc/gtk-3.0/settings.ini <<'EOF'
+[Settings]
+gtk-theme-name=Corte-Dark
+gtk-icon-theme-name=Papirus-Dark
+gtk-font-name=Inter 10
+gtk-cursor-theme-name=Adwaita
+gtk-cursor-theme-size=24
+gtk-application-prefer-dark-theme=1
+gtk-enable-animations=true
+EOF
+
+cat > /etc/xdg/autostart/corte-notifyd.desktop <<'EOF'
+[Desktop Entry]
+Type=Application
+Name=Corte Notifications
+Comment=Daemon de notificaciones de Corte OS
+Exec=dunst
+OnlyShowIn=XFCE;
+X-GNOME-Autostart-enabled=true
+NoDisplay=true
+EOF
+
+cat > /etc/xdg/autostart/corte-network.desktop <<'EOF'
+[Desktop Entry]
+Type=Application
+Name=Corte Network
+Comment=Indicador de red
+Exec=nm-applet --indicator
+OnlyShowIn=XFCE;
+X-GNOME-Autostart-enabled=true
+NoDisplay=true
+EOF
+
+cat > /etc/xdg/autostart/corte-power.desktop <<'EOF'
+[Desktop Entry]
+Type=Application
+Name=Corte Power
+Comment=Gestor de energía
+Exec=xfce4-power-manager
+OnlyShowIn=XFCE;
+X-GNOME-Autostart-enabled=true
+NoDisplay=true
+EOF
+
+cat > /etc/xdg/autostart/corte-welcome.desktop <<'EOF'
+[Desktop Entry]
+Type=Application
+Name=Corte Welcome
+Comment=Asistente de bienvenida
+Exec=corte welcome
+OnlyShowIn=XFCE;
+X-GNOME-Autostart-enabled=true
+NoDisplay=true
+EOF
+
+cat > /etc/lightdm/lightdm.conf <<'EOF'
+[Seat:*]
+autologin-user=corte
+autologin-user-timeout=0
+user-session=xfce
+greeter-session=lightdm-gtk-greeter
+greeter-hide-users=false
+allow-guest=false
+EOF
+
+mkdir -p /etc/lightdm/lightdm-gtk-greeter.conf.d
+cat > /etc/lightdm/lightdm-gtk-greeter.conf.d/50-corte.conf <<'EOF'
+[greeter]
+theme-name=Corte-Dark
+icon-theme-name=Papirus-Dark
+font-name=Inter 10
+background=/usr/share/backgrounds/corte/corte-wallpaper-01.svg
+default-user-image=/usr/share/corte/logo.svg
+hide-user-image=false
+clock-format=%H:%M
+indicators=~host;~spacer;~session;~power
+EOF
+
+cat > /etc/default/zramswap <<'EOF'
+ALGO=zstd
+PERCENT=25
+PRIORITY=100
+EOF
+
+cat > /etc/sysctl.d/99-corte.conf <<'EOF'
+vm.swappiness=10
+vm.vfs_cache_pressure=50
+kernel.kptr_restrict=2
+kernel.dmesg_restrict=1
+net.ipv4.conf.all.rp_filter=1
+EOF
+
+cat > /etc/profile.d/corte.sh <<'EOF'
+export CORTE_OS=1
+if [ -d "$HOME/.local/bin" ]; then
+    case ":$PATH:" in
+        *":$HOME/.local/bin:"*) ;;
+        *) PATH="$HOME/.local/bin:$PATH" ;;
+    esac
+fi
+EOF
+
+chmod 0755 /usr/bin/corte /usr/bin/corte-installer /usr/bin/corte-ci-install 2>/dev/null || true
+chmod 0755 /usr/bin/corte-ci-install 2>/dev/null || true
+chmod 0755 /etc/skel/Desktop/*.desktop 2>/dev/null || true
+
+systemctl enable lightdm.service >/dev/null 2>&1 || true
+systemctl enable NetworkManager.service >/dev/null 2>&1 || true
+systemctl enable corte-boot-marker.service >/dev/null 2>&1 || true
+systemctl enable corte-live-ready.service >/dev/null 2>&1 || true
+systemctl enable corte-ci-install.service >/dev/null 2>&1 || true
+systemctl enable zramswap.service >/dev/null 2>&1 || true
+systemctl set-default graphical.target >/dev/null 2>&1 || true
+
+mkdir -p /etc/systemd/system/multi-user.target.wants /etc/systemd/system/graphical.target.wants
+ln -sf /etc/systemd/system/corte-boot-marker.service /etc/systemd/system/multi-user.target.wants/corte-boot-marker.service
+ln -sf /etc/systemd/system/corte-live-ready.service /etc/systemd/system/multi-user.target.wants/corte-live-ready.service
+ln -sf /etc/systemd/system/corte-ci-install.service /etc/systemd/system/multi-user.target.wants/corte-ci-install.service
+ln -sf /lib/systemd/system/NetworkManager.service /etc/systemd/system/multi-user.target.wants/NetworkManager.service
+ln -sf /lib/systemd/system/zramswap.service /etc/systemd/system/multi-user.target.wants/zramswap.service
+ln -sf /lib/systemd/system/lightdm.service /etc/systemd/system/display-manager.service
+ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target
+
+systemctl disable bluetooth.service >/dev/null 2>&1 || true
+systemctl disable cups.service >/dev/null 2>&1 || true
+systemctl disable cups-browsed.service >/dev/null 2>&1 || true
+systemctl disable ModemManager.service >/dev/null 2>&1 || true
+systemctl disable avahi-daemon.service >/dev/null 2>&1 || true
+systemctl disable apt-daily.timer >/dev/null 2>&1 || true
+systemctl disable apt-daily-upgrade.timer >/dev/null 2>&1 || true
+
+gtk-update-icon-cache -f -t /usr/share/icons/hicolor >/dev/null 2>&1 || true
+update-desktop-database /usr/share/applications >/dev/null 2>&1 || true
+update-mime-database /usr/share/mime >/dev/null 2>&1 || true
+
+find /usr/lib/corte -type d -name '__pycache__' -prune -exec rm -rf {} + 2>/dev/null || true
+find /usr/lib/corte -type f -name '*.pyc' -delete 2>/dev/null || true
+
+apt-get clean
+rm -rf /var/lib/apt/lists/* /var/cache/apt/* /tmp/* /var/tmp/*
+
+exit 0

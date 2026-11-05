@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Corte Settings
+Comment=Configuración del sistema
+Exec=corte settings
+Icon=corte-settings
+Terminal=false
+Categories=Settings;
+StartupNotify=true
+StartupWMClass=corte-settings
+X-Corte-App=true

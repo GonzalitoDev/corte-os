@@ -1,0 +1,25 @@
+gtk-theme-name = "Corte-Dark"
+gtk-icon-theme-name = "Papirus-Dark"
+gtk-font-name = "Inter 10"
+
+style "corte-default"
+{
+    bg[NORMAL]      = "#0b0f17"
+    bg[PRELIGHT]    = "#151d2b"
+    bg[ACTIVE]      = "#101724"
+    bg[SELECTED]    = "#164e63"
+    fg[NORMAL]      = "#e6edf7"
+    fg[PRELIGHT]    = "#ffffff"
+    fg[ACTIVE]      = "#e6edf7"
+    fg[SELECTED]    = "#ffffff"
+    base[NORMAL]    = "#111827"
+    base[PRELIGHT]  = "#151d2b"
+    base[ACTIVE]    = "#0f1622"
+    base[SELECTED]  = "#164e63"
+    text[NORMAL]    = "#e6edf7"
+    text[PRELIGHT]  = "#ffffff"
+    text[ACTIVE]    = "#e6edf7"
+    text[SELECTED]  = "#ffffff"
+}
+
+class "GtkWidget" style "corte-default"

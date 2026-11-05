@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Corte Notifications
+Comment=Centro de notificaciones
+Exec=corte notifications
+Icon=corte-notifications
+Terminal=false
+Categories=Utility;
+StartupNotify=true
+StartupWMClass=corte-notifications
+X-Corte-App=true

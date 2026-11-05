@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Corte Security
+Comment=Herramientas básicas de seguridad
+Exec=corte security
+Icon=corte-security
+Terminal=false
+Categories=System;Security;
+StartupNotify=true
+StartupWMClass=corte-security
+X-Corte-App=true

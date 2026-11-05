@@ -1,0 +1,31 @@
+#!/bin/sh
+set -e
+
+lb config noauto \
+    --mode debian \
+    --architectures amd64 \
+    --distribution bookworm \
+    --archive-areas "main contrib non-free-firmware" \
+    --mirror-bootstrap "http://deb.debian.org/debian/" \
+    --mirror-chroot "http://deb.debian.org/debian/" \
+    --mirror-chroot-security "http://security.debian.org/debian-security/" \
+    --mirror-binary "http://deb.debian.org/debian/" \
+    --binary-images iso-hybrid \
+    --bootloaders "syslinux grub-efi" \
+    --bootappend-live "boot=live components quiet username=corte hostname=corte-os locales=es_ES.UTF-8 keyboard-layouts=es keyboard-variants= timezone=Europe/Madrid console=tty0 console=ttyS0,115200n8" \
+    --debian-installer false \
+    --iso-application "Corte OS" \
+    --iso-preparer "Corte Editor" \
+    --iso-publisher "Corte Editor" \
+    --iso-volume "CORTE_OS" \
+    --compression xz \
+    --apt-indices false \
+    --apt-recommends false \
+    --memtest none \
+    --checksums sha256 \
+    --source false \
+    --win32-loader false \
+    --initsystem systemd \
+    --updates true \
+    --security true \
+    "$@"

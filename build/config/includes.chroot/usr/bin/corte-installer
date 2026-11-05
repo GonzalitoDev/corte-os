@@ -1,0 +1,15 @@
+#!/bin/sh
+if [ ! -d /run/live/medium ] && [ ! -d /lib/live/mount/medium ]; then
+    export PYTHONPATH="/usr/lib/corte${PYTHONPATH:+:$PYTHONPATH}"
+    exec /usr/bin/python3 -m corte.installer "$@"
+fi
+
+if [ "$(id -u)" -ne 0 ]; then
+    if command -v sudo >/dev/null 2>&1; then
+        exec sudo -E env GTK_THEME=Corte-Dark DISPLAY="$DISPLAY" XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}" /usr/bin/corte-installer "$@"
+    fi
+    exec pkexec env GTK_THEME=Corte-Dark DISPLAY="$DISPLAY" XAUTHORITY="${XAUTHORITY:-$HOME/.Xauthority}" /usr/bin/corte-installer "$@"
+fi
+
+export PYTHONPATH="/usr/lib/corte${PYTHONPATH:+:$PYTHONPATH}"
+exec /usr/bin/python3 -m corte.installer "$@"

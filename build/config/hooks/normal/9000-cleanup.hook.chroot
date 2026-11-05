@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*.deb /tmp/* /var/tmp/*
+rm -f /etc/corte/installed
+find /var/log -type f -exec truncate -s 0 {} \; 2>/dev/null || true
+
+exit 0

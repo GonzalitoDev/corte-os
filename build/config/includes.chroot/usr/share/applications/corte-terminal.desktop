@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Corte Terminal
+Comment=Terminal Linux de Corte OS
+Exec=corte terminal
+Icon=corte-terminal
+Terminal=false
+Categories=System;TerminalEmulator;
+StartupNotify=true
+StartupWMClass=corte-terminal
+X-Corte-App=true

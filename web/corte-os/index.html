@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Corte OS: sistema operativo Linux ligero, con escritorio propio y aplicaciones nativas. Descarga la ISO para VirtualBox.">
+  <meta name="theme-color" content="#070b12">
+  <title>Corte OS — Sistema operativo</title>
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="nav-brand" href="https://corte-editor-nine.vercel.app/">
+      <img src="logo.svg" alt="">
+      <span>Corte <b>OS</b></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#caracteristicas">Características</a>
+      <a href="#requisitos">Requisitos</a>
+      <a href="#instalacion">Instalación</a>
+      <a href="#cambios">Cambios</a>
+      <a class="nav-editor" href="https://corte-editor-nine.vercel.app/">Corte Editor ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="badge" id="status-badge">Cargando estado…</span>
+        <h1>Tu sistema operativo.<br><span>Corte OS.</span></h1>
+        <p class="lead">
+          Linux real, ligero y sin dependencia de Internet. Escritorio propio,
+          aplicaciones nativas, instalador gráfico y juegos. Diseñado para
+          VirtualBox y equipos con recursos limitados.
+        </p>
+        <div class="hero-actions">
+          <a id="download-button" class="button primary disabled" href="#" aria-disabled="true">
+            <span id="download-label">Descarga no disponible</span>
+            <small id="download-size">ISO pendiente de compilación</small>
+          </a>
+          <a class="button ghost" href="#instalacion">Cómo instalar en VirtualBox</a>
+        </div>
+        <div class="meta-grid">
+          <div><span>Versión</span><strong id="meta-version">—</strong></div>
+          <div><span>Arquitectura</span><strong>x86_64</strong></div>
+          <div><span>Base</span><strong>Debian 12</strong></div>
+          <div><span>Licencia</span><strong>MIT</strong></div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orb orb-a"></div>
+        <div class="orb orb-b"></div>
+        <img src="logo.svg" alt="">
+        <div class="hero-grid"></div>
+        <div class="hero-tag">CORTE OS · 0.1.0</div>
+      </div>
+    </section>
+
+    <section id="caracteristicas" class="section">
+      <div class="section-head">
+        <span class="eyebrow">SISTEMA</span>
+        <h2>Un escritorio oscuro, rápido y propio</h2>
+        <p>No es una simulación web. Corte OS arranca con kernel Linux, GRUB, XFCE personalizado y aplicaciones GTK reales.</p>
+      </div>
+      <div class="features">
+        <article class="feature">
+          <div class="feature-icon">C</div>
+          <h3>Escritorio Corte</h3>
+          <p>Panel inferior, menú de aplicaciones, reloj, calendario, papelera, notificaciones y tema oscuro con identidad propia.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">◈</div>
+          <h3>Aplicaciones nativas</h3>
+          <p>Corte Browser, Files, Terminal, Store, Settings, Notes, Calculator, Monitor, Media y Security. Todas funcionales y sin conexión.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">⌁</div>
+          <h3>Instalador real</h3>
+          <p>Corte Installer detecta discos virtuales, permite instalación automática o manual, crea usuario y contraseña e instala GRUB BIOS/UEFI.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">✦</div>
+          <h3>Ligero</h3>
+          <p>Pensado para 2 GB de RAM y 2 núcleos. XFCE, zram y aplicaciones Python/GTK para un arranque rápido.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">⬡</div>
+          <h3>Sin Internet</h3>
+          <p>Notas, calculadora, archivos, terminal, monitor, reproductor y ajustes funcionan en local. El navegador y la tienda usan la red cuando existe.</p>
+        </article>
+        <article class="feature">
+          <div class="feature-icon">◎</div>
+          <h3>VirtualBox</h3>
+          <p>ISO híbrida para BIOS y UEFI, disco virtual de 20 GB, red NAT y resolución ajustable desde el sistema.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section screenshots-section">
+      <div class="section-head">
+        <span class="eyebrow">CAPTURAS</span>
+        <h2>El escritorio, sin filtros</h2>
+        <p>Las capturas se publicarán únicamente cuando la ISO haya arrancado y se haya probado en una máquina virtual limpia.</p>
+      </div>
+      <div id="screenshots" class="screenshots">
+        <div class="screenshot-empty">
+          <strong>Capturas pendientes de verificación</strong>
+          <span>No se muestran imágenes simuladas. Este espacio se completará con capturas reales del sistema arrancado.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="requisitos" class="section split">
+      <div class="section-head">
+        <span class="eyebrow">REQUISITOS</span>
+        <h2>Funciona en lo básico</h2>
+        <p>Corte OS está optimizado para máquinas virtuales y equipos modestos.</p>
+      </div>
+      <div class="tables">
+        <table>
+          <thead><tr><th></th><th>Mínimo</th><th>Recomendado</th></tr></thead>
+          <tbody>
+            <tr><td>RAM</td><td>1.5 GB</td><td>2 GB o más</td></tr>
+            <tr><td>CPU</td><td>2 núcleos</td><td>2–4 núcleos</td></tr>
+            <tr><td>Disco virtual</td><td>12 GB</td><td>20 GB</td></tr>
+            <tr><td>Vídeo</td><td>VMSVGA 64 MB</td><td>VMSVGA 128 MB</td></tr>
+            <tr><td>Red</td><td>Opcional</td><td>NAT</td></tr>
+            <tr><td>Firmware</td><td>BIOS</td><td>BIOS o UEFI</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section download-section">
+      <div class="download-card">
+        <div>
+          <span class="eyebrow">DESCARGA</span>
+          <h2>Corte OS <span id="download-version">—</span></h2>
+          <p id="download-description">La ISO se publica tras compilarla y superar las pruebas automáticas de arranque e instalación.</p>
+          <div class="hash-box">
+            <span>SHA-256</span>
+            <code id="sha256">Pendiente de compilación</code>
+            <button id="copy-sha" class="copy" type="button" title="Copiar SHA-256">Copiar</button>
+          </div>
+          <p class="fineprint">
+            El botón de descarga apunta al archivo real alojado en GitHub Releases.
+            No hay enlaces ficticios ni descargas simuladas.
+          </p>
+        </div>
+        <div class="download-aside">
+          <div class="stat"><span>Tamaño ISO</span><strong id="iso-size">—</strong></div>
+          <div class="stat"><span>Publicado</span><strong id="release-date">—</strong></div>
+          <div class="stat"><span>Estado</span><strong id="release-state">Pendiente</strong></div>
+          <a id="download-button-2" class="button primary disabled" href="#" aria-disabled="true">Descargar ISO</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="instalacion" class="section">
+      <div class="section-head">
+        <span class="eyebrow">VIRTUALBOX</span>
+        <h2>Instalar en cinco pasos</h2>
+        <p>Guía resumida. El manual completo está en el repositorio y dentro de la ISO.</p>
+      </div>
+      <ol class="steps">
+        <li><b>Crea la máquina virtual.</b><span>Tipo Linux / Debian (64-bit), 2048 MB de RAM, 2 CPU y disco virtual de 20 GB.</span></li>
+        <li><b>Monta la ISO.</b><span>En Almacenamiento, selecciona la ISO de Corte OS en la unidad óptica.</span></li>
+        <li><b>Ajusta la pantalla.</b><span>Controlador VMSVGA y 128 MB de vídeo. Habilita EFI solo si quieres probar UEFI.</span></li>
+        <li><b>Instala.</b><span>Arranca en modo live, abre Corte Installer y elige el disco virtual. Nunca se tocan discos físicos del anfitrión.</span></li>
+        <li><b>Reinicia.</b><span>Expulsa la ISO y arranca desde el disco instalado. Inicia sesión con el usuario que creaste.</span></li>
+      </ol>
+      <div class="note">
+        <strong>Importante:</strong> la instalación borra el disco virtual seleccionado. No uses
+        «disco físico» ni «unidad de disco real» en VirtualBox. Corte OS solo muestra discos
+        virtuales o extraíbles verificados.
+      </div>
+    </section>
+
+    <section id="cambios" class="section">
+      <div class="section-head">
+        <span class="eyebrow">VERSIÓN</span>
+        <h2>Registro de cambios</h2>
+      </div>
+      <div id="changelog" class="changelog">
+        <div class="change">
+          <span class="version">0.1.0</span>
+          <div>
+            <h3>Base arrancable e instalable</h3>
+            <p>Debian 12, XFCE personalizado, Corte Installer, aplicaciones base, notificaciones y flujo de compilación con pruebas en QEMU.</p>
+          </div>
+        </div>
+        <div class="change">
+          <span class="version">0.2.0</span>
+          <div>
+            <h3>Corte Arcade</h3>
+            <p>Snake, Tetris, Buscaminas, Ajedrez, Sudoku, plataformas 2D, mini Minecraft 2D, supervivencia y carreras. Sistema de récords en SQLite.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <img src="logo.svg" alt="">
+      <span>Corte OS · un sistema operativo de Corte Editor</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://corte-editor-nine.vercel.app/">Corte Editor</a>
+      <a href="#requisitos">Requisitos</a>
+      <a href="#instalacion">Instalación</a>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

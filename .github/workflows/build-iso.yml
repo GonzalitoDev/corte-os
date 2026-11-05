@@ -1,0 +1,96 @@
+name: Build and test Corte OS
+
+on:
+  push:
+    branches: [main, master]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: corte-os-iso-${{ github.repository }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install build and test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            live-build debootstrap xorriso squashfs-tools \
+            isolinux syslinux syslinux-common syslinux-efi \
+            grub-pc-bin grub-efi-amd64-bin \
+            mtools dosfstools parted e2fsprogs rsync \
+            qemu-system-x86 qemu-utils ovmf \
+            wget xz-utils zstd bzip2 gnupg fakeroot uuid-runtime cpio \
+            python3 ca-certificates curl file
+
+      - name: Build ISO
+        run: sudo ./build/build.sh
+
+      - name: Verify checksums
+        run: |
+          ls -lh dist/
+          cd dist
+          sha256sum -c ./*.iso.sha256
+          sha512sum -c ./*.iso.sha512
+
+      - name: Clean build tree
+        run: cd build && sudo lb clean
+
+      - name: Boot test (BIOS)
+        run: bash scripts/ci/boot-test.sh dist/CorteOS-$(cat VERSION)-amd64.iso
+
+      - name: Install test (BIOS, QEMU disk)
+        run: bash scripts/ci/install-test.sh dist/CorteOS-$(cat VERSION)-amd64.iso
+
+      - name: Generate release metadata
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          bash scripts/ci/make-release-json.sh \
+            "dist/CorteOS-$(cat VERSION)-amd64.iso" \
+            "${GITHUB_REF_NAME}" \
+            "web/corte-os/release.json"
+
+      - name: Upload ISO artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: corte-os-iso
+          path: |
+            dist/CorteOS-*.iso
+            dist/CorteOS-*.sha256
+            dist/CorteOS-*.sha512
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+
+      - name: Upload release metadata artifact
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: actions/upload-artifact@v4
+        with:
+          name: corte-os-release-json
+          path: web/corte-os/release.json
+          if-no-files-found: error
+
+      - name: Publish GitHub release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Corte OS ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: |
+            dist/CorteOS-*.iso
+            dist/CorteOS-*.sha256
+            dist/CorteOS-*.sha512
+            web/corte-os/release.json

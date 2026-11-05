@@ -1,0 +1,5 @@
+grub-efi-amd64-bin
+grub-pc-bin
+syslinux
+syslinux-efi
+isolinux

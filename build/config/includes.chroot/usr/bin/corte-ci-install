@@ -1,0 +1,83 @@
+#!/bin/bash
+set -euo pipefail
+
+if [ -e /dev/ttyS0 ]; then
+    exec > >(tee -a /dev/ttyS0) 2>&1
+fi
+
+echo "CORTE_CI_CHECK $(date -Is)"
+
+if [ ! -d /run/live/medium ] && [ ! -d /lib/live/mount/medium ]; then
+    echo "CORTE_CI_SKIP not-live"
+    exit 0
+fi
+
+TRIGGER=""
+for _ in $(seq 1 30); do
+    TRIGGER="$(blkid -L CORTE_CI 2>/dev/null || true)"
+    if [ -n "$TRIGGER" ]; then
+        break
+    fi
+    sleep 1
+done
+if [ -z "$TRIGGER" ]; then
+    echo "CORTE_CI_SKIP no-trigger"
+    exit 0
+fi
+
+MOUNT_DIR=/run/corte-ci
+mkdir -p "$MOUNT_DIR"
+mount -o ro "$TRIGGER" "$MOUNT_DIR"
+
+if [ ! -f "$MOUNT_DIR/auto.json" ]; then
+    echo "CORTE_CI_SKIP no-auto-json"
+    umount "$MOUNT_DIR" || true
+    exit 0
+fi
+
+echo "CORTE_CI_TRIGGER $TRIGGER"
+
+set +e
+python3 - "$MOUNT_DIR/auto.json" <<'PY'
+import json
+import subprocess
+import sys
+
+path = sys.argv[1]
+with open(path, "r", encoding="utf-8") as fh:
+    cfg = json.load(fh)
+
+args = [
+    "/usr/bin/corte-installer",
+    "--auto",
+    "--yes",
+    "--disk", str(cfg["disk"]),
+    "--user", str(cfg.get("user", "corte")),
+    "--password", str(cfg.get("password", "corte")),
+    "--hostname", str(cfg.get("hostname", "corte-os")),
+    "--language", str(cfg.get("language", "es")),
+    "--keyboard", str(cfg.get("keyboard", "es")),
+    "--timezone", str(cfg.get("timezone", "Europe/Madrid")),
+    "--reboot",
+]
+print("CORTE_CI_INSTALL_START", cfg.get("disk"), cfg.get("user"), flush=True)
+proc = subprocess.run(args)
+print("CORTE_CI_INSTALL_EXIT", proc.returncode, flush=True)
+sys.exit(proc.returncode)
+PY
+RC=$?
+set -e
+
+sync
+umount "$MOUNT_DIR" 2>/dev/null || true
+
+if [ "$RC" -eq 0 ]; then
+    echo "CORTE_INSTALL_DONE $(date -Is)"
+    sync
+    sleep 2
+    reboot -f
+else
+    echo "CORTE_INSTALL_FAILED rc=$RC"
+fi
+
+exit "$RC"

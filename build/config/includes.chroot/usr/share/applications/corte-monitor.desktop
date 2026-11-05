@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Corte Monitor
+Comment=Monitor de CPU, RAM, discos y procesos
+Exec=corte monitor
+Icon=corte-monitor
+Terminal=false
+Categories=System;Monitor;
+StartupNotify=true
+StartupWMClass=corte-monitor
+X-Corte-App=true

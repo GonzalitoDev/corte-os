@@ -1,0 +1,53 @@
+# Build outputs
+/build/live-image-*
+/build/binary
+/build/bootstrap
+/build/chroot
+/build/cache
+/build/.build
+/build/*.iso
+/build/*.img
+/build/*.list
+/build/*.packages
+/build/*.contents
+/build/*.files
+/build/*.log
+/build/config/includes.chroot/usr/lib/corte/
+/build/config/includes.chroot/usr/share/corte/
+/build/config/includes.chroot/usr/share/doc/corte-os/
+/dist/
+/iso/
+/artifacts/
+
+# Test artifacts
+/.vm/
+*.qcow2
+*.vdi
+*.vmdk
+*.raw
+*.img
+*.iso
+serial*.log
+qemu*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Local secrets and release overrides
+.env
+.env.*
+web/corte-os/release.local.json
+
+# Vercel
+.vercel/

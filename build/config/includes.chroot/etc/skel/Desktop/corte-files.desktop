@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Corte Files
+Comment=Explorador de archivos de Corte OS
+Exec=corte files %F
+Icon=corte-files
+Terminal=false
+Categories=System;FileManager;Utility;
+MimeType=inode/directory;
+StartupNotify=true
+StartupWMClass=corte-files
+X-Corte-App=true

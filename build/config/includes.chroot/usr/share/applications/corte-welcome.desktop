@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Corte Welcome
+Comment=Bienvenida a Corte OS
+Exec=corte welcome
+Icon=corte-welcome
+Terminal=false
+Categories=System;
+NoDisplay=true
+StartupNotify=true
+StartupWMClass=corte-welcome
+X-Corte-App=true

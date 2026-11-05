@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Corte Browser
+Comment=Navegador web ligero de Corte OS
+Exec=corte browser %U
+Icon=corte-browser
+Terminal=false
+Categories=Network;WebBrowser;
+MimeType=text/html;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true
+StartupWMClass=corte-browser
+X-Corte-App=true

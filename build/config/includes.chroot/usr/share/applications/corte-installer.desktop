@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Corte Installer
+Comment=Instalador de Corte OS
+Exec=corte-installer
+Icon=corte-installer
+Terminal=false
+Categories=System;
+StartupNotify=true
+StartupWMClass=corte-installer
+X-Corte-App=true

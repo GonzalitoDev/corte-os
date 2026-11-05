@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-keyboard-shortcuts" version="1.0">
+  <property name="commands" type="empty">
+    <property name="custom" type="empty">
+      <property name="&lt;Super&gt;space" type="string" value="xfce4-popup-whiskermenu"/>
+      <property name="&lt;Super&gt;Return" type="string" value="corte terminal"/>
+      <property name="&lt;Super&gt;e" type="string" value="corte files"/>
+      <property name="&lt;Super&gt;b" type="string" value="corte browser"/>
+      <property name="&lt;Super&gt;i" type="string" value="corte settings"/>
+      <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
+      <property name="Print" type="string" value="xfce4-screenshooter -f"/>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="corte terminal"/>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;Delete" type="string" value="xfce4-session-logout"/>
+    </property>
+  </property>
+  <property name="xfwm4" type="empty">
+    <property name="custom" type="empty">
+      <property name="&lt;Super&gt;Left" type="string" value="left_workspace_key"/>
+      <property name="&lt;Super&gt;Right" type="string" value="right_workspace_key"/>
+      <property name="&lt;Super&gt;Up" type="string" value="up_workspace_key"/>
+      <property name="&lt;Super&gt;Down" type="string" value="down_workspace_key"/>
+    </property>
+  </property>
+</channel>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <radialGradient id="glowA" cx="18%" cy="12%" r="70%">
+      <stop offset="0" stop-color="#f472b6" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#f472b6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="88%" cy="78%" r="72%">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#140b18"/>
+      <stop offset="1" stop-color="#07050b"/>
+    </linearGradient>
+    <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f472b6"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#base)"/>
+  <rect width="1920" height="1080" fill="url(#grid)"/>
+  <rect width="1920" height="1080" fill="url(#glowA)"/>
+  <rect width="1920" height="1080" fill="url(#glowB)"/>
+  <g opacity="0.10" fill="none" stroke="url(#stroke)" stroke-width="2">
+    <circle cx="1520" cy="260" r="210"/>
+    <circle cx="1520" cy="260" r="300"/>
+    <circle cx="1520" cy="260" r="390"/>
+  </g>
+  <g transform="translate(1240 250) scale(2.2)" opacity="0.22">
+    <path d="M179 84c-12-16-31-26-52-26-38 0-68 31-68 70s30 70 68 70c21 0 40-10 52-26" fill="none" stroke="url(#stroke)" stroke-width="19" stroke-linecap="round"/>
+    <circle cx="196" cy="69" r="10" fill="#f472b6"/>
+  </g>
+  <g font-family="Inter, DejaVu Sans, sans-serif" fill="#e6edf7">
+    <text x="128" y="742" font-size="86" font-weight="800" letter-spacing="18">CORTE</text>
+    <text x="132" y="824" font-size="86" font-weight="200" letter-spacing="26" fill="#f472b6">OS</text>
+    <text x="136" y="884" font-size="21" font-weight="500" letter-spacing="9" fill="#8a97ab">SISTEMA OPERATIVO · NEBULA</text>
+  </g>
+  <g transform="translate(128 914)" fill="none" stroke="url(#stroke)" stroke-width="3">
+    <path d="M0 0h300"/>
+  </g>
+  <text x="1792" y="1032" text-anchor="end" font-family="Inter, DejaVu Sans, sans-serif" font-size="18" letter-spacing="5" fill="#6b778a">CORTE EDITOR</text>
+</svg>

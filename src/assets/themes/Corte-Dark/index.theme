@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Corte Dark
+Comment=Tema oscuro oficial de Corte OS
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Corte-Dark
+MetacityTheme=Arc-Dark
+IconTheme=Papirus-Dark
+CursorTheme=Adwaita
+ButtonLayout=menu:minimize,maximize,close

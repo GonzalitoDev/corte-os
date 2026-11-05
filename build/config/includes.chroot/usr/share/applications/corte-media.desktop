@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Corte Media
+Comment=Reproductor multimedia
+Exec=corte media %F
+Icon=corte-media
+Terminal=false
+Categories=AudioVideo;Player;
+MimeType=audio/*;video/*;
+StartupNotify=true
+StartupWMClass=corte-media
+X-Corte-App=true
