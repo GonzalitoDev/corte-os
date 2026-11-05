@@ -1,17 +1,19 @@
 {
-  "version": "0.1.0",
-  "released": "2026-11-05T05:12:02+00:00",
-  "summary": "Beta 0.1.0 de Corte OS para VirtualBox: escritorio propio, aplicaciones e instalador.",
+  "version": "0.1.1",
+  "developer": "gonzita",
+  "released": "2026-11-05T06:26:30+00:00",
+  "summary": "Beta de Corte OS para VirtualBox: escritorio propio, aplicaciones y Corte Installer.",
   "iso": {
-    "filename": "CorteOS-0.1.0-amd64.iso",
-    "size": 1042284544,
-    "sha256": "130c0d7b2da8fc5c6d101f6b86de2a49f7ff7eb52e147baf4d62eed801cadb6d",
-    "sha512": "a6d66616e04ecd550f9086cef69ae8529b647c7ec3e5eb97e26422bd54ba55a2cb918387bc6b0a3550631f1e285cf1310894b25aa782b8bb7858f3702b4aee07",
-    "url": "https://github.com/GonzalitoDev/corte-os/releases/download/v0.1.0/CorteOS-0.1.0-amd64.iso"
+    "filename": "CorteOS-0.1.1-amd64.iso",
+    "size": 1041235968,
+    "sha256": "52766651280bb67f1b190334de4a75838c483955e9d7d2d970845dfb80a1f42e",
+    "sha512": "f10e458464e890f16955b33aec19ad9bb9ef2756809aa4543c4df6cd37c3a7442c25c0bceafd313f83677dcb1c71842f098ac4ef44fd3f5a2e6c632459813ec0",
+    "url": "https://github.com/GonzalitoDev/corte-os/releases/download/v0.1.1/CorteOS-0.1.1-amd64.iso"
   },
   "screenshots": [],
   "notes": [
-    "Es una beta: puede tener fallos; probala en una m?quina virtual y no la uses para datos importantes.",
+    "Desarrollado por gonzita.",
+    "Es una beta: puede tener fallos; probala en una m?quina virtual.",
     "Base Debian 12 con arranque BIOS y UEFI.",
     "Escritorio XFCE personalizado y aplicaciones Corte.",
     "Corte Installer con modo automático y manual."
