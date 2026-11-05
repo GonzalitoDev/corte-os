@@ -3,6 +3,7 @@
 Sistema operativo Linux propio, ligero y sin dependencia de Internet, construido sobre Debian 12 (bookworm) para x86_64 y pensado para ejecutarse e instalarse en Oracle VirtualBox.
 
 P?gina publicada: https://corte-os.vercel.app/
+Desarrollador: gonzita
 
 Corte OS no es una simulación web. Es una distribución Linux real con kernel, arranque GRUB, entorno gráfico XFCE personalizado, aplicaciones nativas GTK, instalador propio y utilidades de sistema.
 
@@ -18,11 +19,11 @@ Esta entrega contiene el código fuente completo de la Etapa 1 y la base para la
 | Aplicaciones base | Implementadas |
 | Centro de notificaciones | Implementado sobre dunst |
 | Corte Arcade y juegos | Etapa 2 |
-| ISO compilada y probada | Publicada v0.1.0 (994 MB) |
+| ISO compilada y probada | Beta v0.1.1 publicada (994 MB) |
 | Firma de la ISO | Pendiente; SHA-256 y SHA-512 publicados |
 | Página de descarga para Corte Editor | Publicada con enlace real |
 
-Descarga: https://github.com/GonzalitoDev/corte-os/releases/tag/v0.1.0
+Descarga: https://github.com/GonzalitoDev/corte-os/releases/tag/v0.1.1
 
 La ISO se compiló y verificó en GitHub Actions: compilación Debian bookworm, arranque BIOS, arranque directo del kernel, instalación automática en un disco virtual y arranque del sistema instalado. Este equipo Windows no puede compilarla localmente, pero el flujo de CI ya la ha generado y publicado. No se debe publicar una ISO sin ese flujo de pruebas.
 
