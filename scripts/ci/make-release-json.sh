@@ -23,7 +23,7 @@ import sys
 data = {
     "version": version,
     "released": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
-    "summary": "Corte OS para VirtualBox: escritorio propio, aplicaciones y Corte Installer.",
+    "summary": "Beta de Corte OS para VirtualBox: escritorio propio, aplicaciones y Corte Installer.",
     "iso": {
         "filename": f"CorteOS-{version}-amd64.iso",
         "size": int(size),
@@ -33,6 +33,7 @@ data = {
     },
     "screenshots": [],
     "notes": [
+        "Es una beta: puede tener fallos; probala en una m?quina virtual.",
         "Base Debian 12 con arranque BIOS y UEFI.",
         "Escritorio XFCE personalizado y aplicaciones Corte.",
         "Corte Installer con modo automático y manual.",

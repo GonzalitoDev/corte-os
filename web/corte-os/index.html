@@ -16,6 +16,7 @@
       <span>Corte <b>OS</b></span>
     </a>
     <nav class="nav-links">
+      <a href="#beta">Beta</a>
       <a href="#caracteristicas">Características</a>
       <a href="#requisitos">Requisitos</a>
       <a href="#instalacion">Instalación</a>
@@ -31,8 +32,8 @@
         <h1>Tu sistema operativo.<br><span>Corte OS.</span></h1>
         <p class="lead">
           Linux real, ligero y sin dependencia de Internet. Escritorio propio,
-          aplicaciones nativas, instalador gráfico y juegos. Diseñado para
-          VirtualBox y equipos con recursos limitados.
+          aplicaciones nativas e instalador gráfico. Corte Arcade llegará más adelante.
+          Diseñado para VirtualBox y equipos con recursos limitados.
         </p>
         <div class="hero-actions">
           <a id="download-button" class="button primary disabled" href="#" aria-disabled="true">
@@ -54,6 +55,42 @@
         <img src="logo.svg" alt="">
         <div class="hero-grid"></div>
         <div class="hero-tag">CORTE OS · 0.1.0</div>
+      </div>
+    </section>
+
+    <section id="beta" class="section beta-section">
+      <div class="beta-card">
+        <span class="eyebrow">BETA</span>
+        <h2>Esto es una beta, en serio</h2>
+        <p>Corte OS es mi primer sistema operativo y todavía le faltan cosas. La base arranca, se instala y las apps abren, pero no esperes un Windows ni un Ubuntu pulido: puede que alguna pantalla se vea rara, que el instalador haga algo que no te guste o que una app se cierre sin avisar. Si te pasa, no es tu culpa: es un bug.</p>
+        <p>Lo probé en VirtualBox, con arranque BIOS, instalación automática y arranque del sistema instalado. No lo probé en todo el hardware del mundo, así que usalo en una máquina virtual y no en tu computadora principal. Todavía no guardes nada importante ahí.</p>
+        <div class="beta-columns">
+          <div>
+            <b>Lo que ya está</b>
+            <ul>
+              <li>Arranque BIOS y escritorio live.</li>
+              <li>Instalador automático en disco virtual.</li>
+              <li>Aplicaciones Corte y notificaciones.</li>
+            </ul>
+          </div>
+          <div>
+            <b>Lo que puede fallar</b>
+            <ul>
+              <li>UEFI en algunas máquinas.</li>
+              <li>Wi-Fi, audio y resoluciones raras.</li>
+              <li>Hardware real que no probé.</li>
+            </ul>
+          </div>
+          <div>
+            <b>Lo que falta</b>
+            <ul>
+              <li>Corte Arcade y sus juegos.</li>
+              <li>Capturas reales del escritorio.</li>
+              <li>Más pruebas y pulido.</li>
+            </ul>
+          </div>
+        </div>
+        <p>Si encontrás un fallo, abrí un issue en <a href="https://github.com/GonzalitoDev/corte-os/issues">GitHub</a> y contame qué pasó. Esta es la versión 0.1.0 y va a cambiar.</p>
       </div>
     </section>
 
@@ -135,7 +172,7 @@
     <section class="section download-section">
       <div class="download-card">
         <div>
-          <span class="eyebrow">DESCARGA</span>
+          <span class="eyebrow">BETA · DESCARGA</span>
           <h2>Corte OS <span id="download-version">—</span></h2>
           <p id="download-description">La ISO se publica tras compilarla y superar las pruebas automáticas de arranque e instalación.</p>
           <div class="hash-box">

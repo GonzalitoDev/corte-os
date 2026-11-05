@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
   "released": "2026-11-05T05:12:02+00:00",
-  "summary": "Corte OS para VirtualBox: escritorio propio, aplicaciones y Corte Installer.",
+  "summary": "Beta 0.1.0 de Corte OS para VirtualBox: escritorio propio, aplicaciones e instalador.",
   "iso": {
     "filename": "CorteOS-0.1.0-amd64.iso",
     "size": 1042284544,
@@ -11,6 +11,7 @@
   },
   "screenshots": [],
   "notes": [
+    "Es una beta: puede tener fallos; probala en una m?quina virtual y no la uses para datos importantes.",
     "Base Debian 12 con arranque BIOS y UEFI.",
     "Escritorio XFCE personalizado y aplicaciones Corte.",
     "Corte Installer con modo automático y manual."

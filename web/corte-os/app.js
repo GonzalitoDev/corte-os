@@ -54,7 +54,7 @@ function enableDownload(button, url, size) {
   button.setAttribute("href", url);
   button.setAttribute("download", "");
   const span = button.querySelector("span");
-  if (span) span.textContent = "Descargar Corte OS";
+  if (span) span.textContent = "Descargar Corte OS (beta)";
   const small = button.querySelector("small");
   if (small) small.textContent = `ISO · ${humanSize(size)}`;
 }
@@ -96,8 +96,8 @@ async function boot() {
   ];
 
   if (!release) {
-    setText("status-badge", "Metadatos no disponibles");
-    setText("download-description", "No se pudo leer release.json. La descarga permanece desactivada.");
+    setText("status-badge", "Beta ? metadatos no disponibles");
+    setText("download-description", "No se pudo leer release.json. La descarga beta permanece desactivada.");
     buttons.forEach((button) => disableDownload(button, "Descarga no disponible"));
     return;
   }
