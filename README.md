@@ -12,16 +12,19 @@ Esta entrega contiene el código fuente completo de la Etapa 1 y la base para la
 
 | Área | Estado |
 | --- | --- |
-| Definición de la distribución y scripts de construcción | Implementado, pendiente de compilar |
-| Sesión gráfica XFCE con identidad Corte | Implementado |
-| Corte Installer (GTK + backend real + modo automático) | Implementado, pendiente de probar en VM |
+| Definición de la distribución y scripts de construcción | Compilado y probado en CI |
+| Sesión gráfica XFCE con identidad Corte | Implementada |
+| Corte Installer (GTK + backend real + modo automático) | Probado en CI con instalación automática |
 | Aplicaciones base | Implementadas |
 | Centro de notificaciones | Implementado sobre dunst |
 | Corte Arcade y juegos | Etapa 2 |
-| ISO firmada y publicada | Pendiente de compilar y verificar |
-| Página de descarga para Corte Editor | Implementada, pendiente de enlazar a un release real |
+| ISO compilada y probada | Publicada v0.1.0 (994 MB) |
+| Firma de la ISO | Pendiente; SHA-256 y SHA-512 publicados |
+| Página de descarga para Corte Editor | Publicada con enlace real |
 
-Importante: este equipo de desarrollo es Windows y no dispone de WSL, Docker ni virtualización habilitada, por lo que aquí no se ha podido generar ni arrancar la ISO. El repositorio incluye un flujo de integración continua que compila la ISO, la arranca en QEMU y ejecuta una instalación automática de prueba antes de publicar cualquier artefacto. No se debe publicar una ISO hasta que ese flujo pase.
+Descarga: https://github.com/GonzalitoDev/corte-os/releases/tag/v0.1.0
+
+La ISO se compiló y verificó en GitHub Actions: compilación Debian bookworm, arranque BIOS, arranque directo del kernel, instalación automática en un disco virtual y arranque del sistema instalado. Este equipo Windows no puede compilarla localmente, pero el flujo de CI ya la ha generado y publicado. No se debe publicar una ISO sin ese flujo de pruebas.
 
 ## Base técnica
 
@@ -33,7 +36,7 @@ Importante: este equipo de desarrollo es Windows y no dispone de WSL, Docker ni 
 - Almacenamiento local: SQLite.
 - Navegador: WebKitGTK 4.1.
 - Multimedia: GStreamer.
-- Instalador: Corte Installer, Python + GTK, con backend `parted`, `unsquashfs`, `chroot` y GRUB.
+- Instalador: Corte Installer, Python + GTK, con backend `parted`, montaje del squashfs, `chroot` y GRUB.
 - Construcción: live-build dentro de Debian 12, Docker o GitHub Actions.
 
 ## Requisitos de la máquina anfitriona
