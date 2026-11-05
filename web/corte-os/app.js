@@ -106,17 +106,17 @@ async function boot() {
   const iso = release.iso || {};
   const available = Boolean(iso.url);
   setText("meta-version", release.version || "—");
-  setText("download-version", release.version || "—");
+  setText("download-version", (release.version || "—") + " · beta");
   setText("iso-size", available ? humanSize(iso.size) : "—");
   setText("release-date", formatDate(release.released));
-  setText("release-state", available ? "Disponible" : "Pendiente de verificación");
-  setText("status-badge", available ? "Descarga disponible" : "Compilación y pruebas pendientes");
+  setText("release-state", available ? "Beta disponible" : "Beta pendiente");
+  setText("status-badge", available ? "Beta · descarga disponible" : "Beta · compilación pendiente");
   setText("sha256", iso.sha256 || "Pendiente de compilación");
   setText(
     "download-description",
     available
-      ? (release.summary || "Corte OS está listo para VirtualBox. Verifica el SHA-256 antes de instalar.")
-      : "La ISO se publica únicamente después de compilarla y superar las pruebas automáticas de arranque e instalación."
+      ? "Esta es la beta 0.1.0 de Corte OS para VirtualBox. Arranca e instala, pero puede tener fallos. Probalá en una máquina virtual y reportá lo que se rompa."
+      : "La ISO beta se publica únicamente después de compilarla y superar las pruebas automáticas de arranque e instalación."
   );
 
   if (available) {
