@@ -58,7 +58,7 @@ chmod 0644 "$CONFIG"/includes.chroot/usr/share/applications/*.desktop 2>/dev/nul
 log "Generando configuración de live-build"
 cd "$BUILD"
 lb clean >/dev/null 2>&1 || true
-lb config
+bash "$CONFIG/auto/config"
 
 log "Construyendo la imagen (esto puede tardar entre 20 y 60 minutos)"
 lb build
