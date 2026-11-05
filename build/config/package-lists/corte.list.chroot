@@ -33,7 +33,6 @@ e2fsprogs
 dosfstools
 parted
 gdisk
-squashfs-tools
 rsync
 tar
 gzip

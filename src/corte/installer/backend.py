@@ -86,8 +86,9 @@ class Installer:
                 "Corte Installer solo está disponible desde el entorno live de la ISO. "
                 "No se ejecutará en un sistema instalado."
             )
-        if not Path("/usr/bin/unsquashfs").exists():
-            raise InstallerError("Falta unsquashfs (paquete squashfs-tools).")
+        for tool in ("mount", "cp", "umount"):
+            if shutil.which(tool) is None:
+                raise InstallerError(f"Falta la herramienta {tool} en el entorno live.")
         if not Path("/usr/sbin/grub-install").exists() and not Path("/usr/bin/grub-install").exists():
             raise InstallerError("Falta grub-install.")
         if self.config.mode not in ("auto", "manual"):
@@ -315,12 +316,45 @@ class Installer:
         if squashfs is None:
             raise InstallerError("No se encontró filesystem.squashfs en el medio live.")
         self.clear_target()
-        result = run(
-            ["unsquashfs", "-f", "-d", str(TARGET), str(squashfs)],
-            timeout=3600,
-        )
-        if result.returncode != 0:
-            raise InstallerError(f"No se pudo copiar el sistema: {result.stderr.strip()}")
+        source_mount = Path("/mnt/corte-source")
+        source_mount.mkdir(parents=True, exist_ok=True)
+        if os.path.ismount(source_mount):
+            run(["umount", str(source_mount)], timeout=60, check=False)
+        mounted = False
+        try:
+            result = run(
+                ["mount", "-o", "loop,ro", "-t", "squashfs", str(squashfs), str(source_mount)],
+                timeout=180,
+            )
+            if result.returncode == 0:
+                mounted = True
+                copy = run(
+                    ["cp", "-a", f"{source_mount}/.", f"{TARGET}/"],
+                    timeout=3600,
+                )
+                if copy.returncode != 0:
+                    raise InstallerError(
+                        f"No se pudo copiar el sistema: {(copy.stderr or copy.stdout).strip()}"
+                    )
+                return
+            unsquashfs = shutil.which("unsquashfs")
+            if unsquashfs:
+                result = run(
+                    [unsquashfs, "-f", "-d", str(TARGET), str(squashfs)],
+                    timeout=3600,
+                )
+                if result.returncode != 0:
+                    raise InstallerError(
+                        f"No se pudo copiar el sistema: {(result.stderr or result.stdout).strip()}"
+                    )
+                return
+            raise InstallerError(
+                "No se pudo montar filesystem.squashfs y unsquashfs no está disponible. "
+                f"Detalle: {(result.stderr or result.stdout).strip()}"
+            )
+        finally:
+            if mounted:
+                run(["umount", str(source_mount)], timeout=120, check=False)
 
     def configure_system(self):
         self.bind_mounts()

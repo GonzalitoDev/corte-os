@@ -29,6 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         uuid-runtime \
         cpio \
         python3 \
+        apt-utils \
         bash \
         file \
     && rm -rf /var/lib/apt/lists/*
