@@ -17,6 +17,7 @@ def build_parser():
     parser.add_argument("--version", action="version", version=f"Corte Installer {version()}")
     parser.add_argument("--list-disks", action="store_true", help="Muestra los discos detectados en JSON.")
     parser.add_argument("--auto", action="store_true", help="Instalación automática sin interfaz.")
+    parser.add_argument("--yes", action="store_true", help="No pedir confirmación en modo automático.")
     parser.add_argument("--disk", help="Disco destino, por ejemplo /dev/vda.")
     parser.add_argument("--user", default="corte", help="Usuario a crear.")
     parser.add_argument("--password", default="", help="Contraseña del usuario.")
